@@ -27,6 +27,7 @@ pipeline {
                     nodejs(nodeJSInstallationName: 'NodeJS') {
                         echo 'React build'
                         // CI=false 추가 및 npm install에 --legacy-peer-deps 옵션 추가
+                        sh 'npm install ajv --save-dev'
                         sh 'npm install --legacy-peer-deps && CI=false npm run build'
                     }
                 }
