@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        nodejs("NodeJS")
+    }
+
     environment{
         CONTAINER_IMAGE = "docker.io/kdh3213/frontend:latest"
     }
@@ -21,6 +25,7 @@ pipeline {
                 sh 'rm -rf oon_metanet-legacy-frontend_main oon_metanet-legacy-frontend_main@tmp'
                 dir("./oon_metanet-legacy-frontend_main") {
                     nodejs(nodeJSInstallationName: 'NodeJS') {
+                        echo 'React build'
                         // CI=false 추가 및 npm install에 --legacy-peer-deps 옵션 추가
                         sh 'npm install --legacy-peer-deps && CI=false npm run build'
                     }
