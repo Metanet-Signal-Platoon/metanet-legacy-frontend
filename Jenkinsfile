@@ -26,5 +26,12 @@ pipeline {
                 }
             }
         }
+        stage('Build React App') {
+            steps {
+                dir("./oon_metanet-legacy-frontend_main") {
+                    sh 'CI=false npm run build'
+                }
+            }
+        }
     }
 }
