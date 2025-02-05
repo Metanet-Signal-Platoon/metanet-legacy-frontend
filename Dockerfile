@@ -3,8 +3,8 @@ FROM node:22 AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm install --legacy-peer-deps 
-# RUN npm install ajv --save-dev
+RUN npm install --force
+# RUN npm install ajv --save-dev --legacy-peer-deps 
 
 COPY . .
 RUN npm run build
