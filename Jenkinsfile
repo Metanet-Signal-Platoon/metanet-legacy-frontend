@@ -22,7 +22,7 @@ pipeline {
                 dir("./oon_metanet-legacy-frontend_main") {
                     nodejs(nodeJSInstallationName: 'NodeJS') {
                         // CI=false 추가 및 npm install에 --legacy-peer-deps 옵션 추가
-                        ssh 'npm install --legacy-peer-deps && CI=false npm run build'
+                        sh 'npm install --legacy-peer-deps && CI=false npm run build'
                     }
                 }
             }
