@@ -16,21 +16,13 @@ pipeline {
                         url: 'https://github.com/Metanet-Signal-Platoon/metanet-legacy-frontend'
             }
         }
-        stage('Cleanup Workspace') {
-            steps {
-                deleteDir() // 기존 빌드 파일 삭제
-            }
-        }
-
         stage('Build Npm') {
             steps {
+                sh 'rm -rf oon_metanet-legacy-frontend_main oon_metanet-legacy-frontend_main@tmp'
                 dir("./oon_metanet-legacy-frontend_main") {
                     nodejs(nodeJSInstallationName: 'NodeJS') {
                         // CI=false 추가 및 npm install에 --legacy-peer-deps 옵션 추가
-                        sh 'rm -rf node_modules package-lock.json'
-                        sh 'npm cache clean --force'
-                        sh 'npm install --legacy-peer-deps'
-                        sh 'CI=false npm run build'
+                        ssh 'npm install --legacy-peer-deps && CI=false npm run build'
                     }
                 }
             }
