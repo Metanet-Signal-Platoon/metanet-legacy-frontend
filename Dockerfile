@@ -8,7 +8,6 @@ RUN npm run build
 
 # 2️⃣ Nginx를 사용하여 정적 파일 서빙
 FROM docker.io/library/nginx:latest
-# FROM nginx:1.27.3-alpine-slim
 COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

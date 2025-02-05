@@ -54,6 +54,28 @@ pipeline {
                 }
             }
         }
+         stage('Deploy to Kubernetes') {
+            steps {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no root@192.168.0.13 '
+                    echo "SSH Connection Successful"
+                    
+                    echo "Applying Kubernetes Deployment"
+                    export KUBECONFIG=/root/admin.conf
 
+                    kubectl config view 
+                    kubectl get nodes
+                    
+                    # 기존 배포물 삭제
+                    kubectl delete -f ~/kubernetes-cicd/1_frontend_deployment.yaml --ignore-not-found=true
+                    kubectl delete -f ~/kubernetes-cicd/1_frontend_deployment.yaml --ignore-not-found=true
+
+                    # 새로운 배포물물 적용
+                    kubectl apply -f ~/kubernetes-cicd/1_frontend_deployment.yaml
+                    kubectl apply -f ~/kubernetes-cicd/1_frontend_deployment.yaml
+                    '
+                    """
+            }
+        }
     }
 }
