@@ -22,20 +22,14 @@ pipeline {
         }
         stage('Build Npm') {
             steps {
-                 dir("./oon_metanet-legacy-frontend_main") {
-                    sh 'rm -rf oon_metanet-legacy-frontend_main oon_metanet-legacy-frontend_main@tmp'
+                sh 'rm -rf oon_metanet-legacy-frontend_main oon_metanet-legacy-frontend_main@tmp'
+                dir("./oon_metanet-legacy-frontend_main") { 
+                    sh 'npm install --save-dev ajv@^7  --force' # ajv 해결하기
                     sh 'npm install --legacy-peer-deps && CI=false npm run build'
                 }
             }
         }
-        // stage('Build React App') {
-        //     steps {
-        //         dir("./oon_metanet-legacy-frontend_main") {
-                    
-        //             sh 'CI=false npm run build'
-        //         }
-        //     }
-        // }
+        
         stage('Build Image') {
             steps {
                 script {
