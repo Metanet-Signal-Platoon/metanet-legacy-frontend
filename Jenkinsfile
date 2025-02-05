@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh 'rm -rf oon_metanet-legacy-frontend_main oon_metanet-legacy-frontend_main@tmp'
                 dir("./oon_metanet-legacy-frontend_main") { 
-                    sh 'npm install --save-dev ajv@^7  --force' # ajv 해결하기
+                    sh 'npm install --save-dev ajv@^7  --force'
                     sh 'npm install --legacy-peer-deps && CI=false npm run build'
                 }
             }
