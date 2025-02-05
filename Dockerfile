@@ -3,9 +3,10 @@ FROM node:22 AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+
 RUN npm install --legacy-peer-deps
 # RUN npm install ajv --save-dev --legacy-peer-deps 
-RUN npm install ajv@6 ajv-keywords@3 
+# RUN npm install ajv@6 ajv-keywords@3 
 
 COPY . .
 RUN npm run build
