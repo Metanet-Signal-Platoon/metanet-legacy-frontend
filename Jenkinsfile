@@ -22,14 +22,9 @@ pipeline {
         }
         stage('Build Npm') {
             steps {
-                //sh 'rm -rf oon_metanet-legacy-frontend_main oon_metanet-legacy-frontend_main@tmp'
                  dir("./oon_metanet-legacy-frontend_main") {
-                    sh 'rm -rf node_modules'
-                    sh 'rm package-lock.json'
-                    sh 'npm cache clean --force'
-                    sh 'npm install'
-                    sh 'npm install ajv@latest ajv-keywords@latest'
-                    sh 'CI=false npm run build'
+                    sh 'rm -rf oon_metanet-legacy-frontend_main oon_metanet-legacy-frontend_main@tmp'
+                    sh 'npm install --legacy-peer-deps && CI=false npm run build'
                 }
             }
         }
