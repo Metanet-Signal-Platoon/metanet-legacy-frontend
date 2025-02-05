@@ -29,7 +29,7 @@ pipeline {
                         // CI=false 추가 및 npm install에 --legacy-peer-deps 옵션 추가
                         sh 'rm -rf node_modules package-lock.json'
                         sh 'npm cache clean --force'
-                        sh 'npm ci --legacy-peer-deps'
+                        sh 'npm install --legacy-peer-deps'
                         sh 'CI=false npm run build'
                     }
                 }
